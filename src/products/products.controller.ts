@@ -3,7 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
+  Put,
   Param,
   Delete,
   UseGuards,
@@ -49,7 +49,7 @@ export class ProductsController {
   @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Update products by id' })
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateProductsDto: UpdateProductsDto) {
     return this.productsService.update(id, updateProductsDto);
   }
