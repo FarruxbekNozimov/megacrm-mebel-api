@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { StaffService } from './staff.service';
 import { CreateStaffDto } from './dto/create-staff.dto';
@@ -27,12 +28,12 @@ export class StaffController {
     return this.staffService.create(createStaffDto);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @HttpCode(200)
+  // @UseGuards(JwtAuthGuard)
+  // @HttpCode(200)
   @ApiOperation({ summary: 'Find all staff' })
   @Get()
-  findAll() {
-    return this.staffService.findAll();
+  findAll(@Query() query: any) {
+    return this.staffService.findAll(query);
   }
 
   @UseGuards(JwtAuthGuard)

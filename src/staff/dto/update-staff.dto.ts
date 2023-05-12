@@ -16,7 +16,7 @@ export class UpdateStaffDto {
   @ApiProperty({ example: '123password' })
   password?: string;
 
-  @ApiProperty({ example: '1' })
+  @ApiProperty({ example: 'ADMIN' })
   role?: string;
 
   hashed_token?: string;

@@ -48,8 +48,10 @@ export class StaffService {
     return res;
   }
 
-  async findAll() {
-    return this.orderModel.find().exec();
+  async findAll(query: string) {
+    const allStaff = await this.orderModel.find().exec();
+    console.log(allStaff, query);
+    return allStaff;
   }
 
   async findOneLogin(login: string) {

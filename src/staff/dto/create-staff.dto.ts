@@ -18,7 +18,7 @@ export class CreateStaffDto {
   @ApiProperty({ example: '123password' })
   password: string;
 
-  @ApiProperty({ example: '1' })
+  @ApiProperty({ example: 'ADMIN' })
   @IsNumber()
   role: string;
 }
