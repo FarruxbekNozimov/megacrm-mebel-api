@@ -28,8 +28,8 @@ export class StaffController {
     return this.staffService.create(createStaffDto);
   }
 
-  // @UseGuards(JwtAuthGuard)
-  // @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
+  @HttpCode(200)
   @ApiOperation({ summary: 'Find all staff' })
   @Get()
   findAll(@Query() query: any) {

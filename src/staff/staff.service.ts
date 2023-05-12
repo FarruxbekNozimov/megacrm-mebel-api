@@ -49,9 +49,14 @@ export class StaffService {
   }
 
   async findAll(query: string) {
+    const itemsPerPage = query['limit'] || 10;
     const allStaff = await this.orderModel.find().exec();
-    console.log(allStaff, query);
-    return allStaff;
+    const paginate = query['page'] * itemsPerPage - 1;
+    const pagination = allStaff.slice(paginate, paginate + itemsPerPage);
+    if (!pagination.length) {
+      return allStaff;
+    }
+    return pagination;
   }
 
   async findOneLogin(login: string) {
