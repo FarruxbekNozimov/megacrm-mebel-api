@@ -14,9 +14,7 @@ const start = async () => {
       credentials: true,
     });
 
-
     const PORT = process.env.PORT || 7000;
-
 
     app.setGlobalPrefix('api');
 
@@ -41,7 +39,10 @@ const start = async () => {
       console.log(`Server ${PORT} da yuguryapti...`);
     });
     if (process.env.NODE_ENV === 'development') {
-      const pathToSwaggerStaticFolder = resolve(process.cwd(), 'swagger-static');
+      const pathToSwaggerStaticFolder = resolve(
+        process.cwd(),
+        'swagger-static',
+      );
 
       // write swagger json file
       const pathToSwaggerJson = resolve(
@@ -50,9 +51,10 @@ const start = async () => {
       );
       const swaggerJson = JSON.stringify(document, null, 2);
       writeFileSync(pathToSwaggerJson, swaggerJson);
-      console.log(`Swagger JSON file written to: '/swagger-static/swagger.json'`);
+      console.log(
+        `Swagger JSON file written to: '/swagger-static/swagger.json'`,
+      );
     }
-
   } catch (error) {
     console.log(error);
   }

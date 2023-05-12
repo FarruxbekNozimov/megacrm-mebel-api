@@ -5,6 +5,7 @@ import { Staff, StaffDocument } from './schemas/staff.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
+import { CheckPhoneNumber } from '../helpers/checkPhone';
 
 @Injectable()
 export class StaffService {
@@ -36,11 +37,12 @@ export class StaffService {
         msg: `To'g'ri role kiriting : SUPER-ADMIN, ADMIN, OPERATOR, DELIVERYMAN`,
       });
     }
-    if (createStaffDto.phone_number.length != 9) {
-      throw new BadRequestException({
-        msg: `Telefon raqam 9 ta raqamdan iborat bo'lishi kerak`,
-      });
+    try {
+      CheckPhoneNumber(createStaffDto.phone_number);
+    } catch (err) {
+      return err;
     }
+
     createStaffDto.password = await bcrypt.hash(createStaffDto.password, 7);
     const res = await new this.orderModel(createStaffDto).save();
     return res;

@@ -6,12 +6,10 @@ export type CityDocument = HydratedDocument<City>;
 @Schema()
 export class City {
   @Prop()
-	name:string;
+  name: string;
 
-	@Prop([{ type: mongoose.Schema.Types.ObjectId, ref:'Region' }])
-	region_id:mongoose.Schema.Types.ObjectId;
-
-	
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Region' }])
+  region_id: mongoose.Schema.Types.ObjectId;
 }
 
 export const CitySchema = SchemaFactory.createForClass(City);
