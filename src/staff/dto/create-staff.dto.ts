@@ -1,10 +1,12 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNumber, IsString, MaxLength } from 'class-validator';
 
 export class CreateStaffDto {
-  @ApiProperty({ example: 'Gulchapchap' })
+  @ApiProperty({ example: 'Alibek' })
   fullname: string;
 
-  @ApiProperty({ example: '+998121231212' })
+  @ApiProperty({ example: '70' })
+  @MaxLength(10)
   phone_number: string;
 
   @ApiProperty({ example: '8600 1092 0923 1294' })
@@ -17,5 +19,6 @@ export class CreateStaffDto {
   password: string;
 
   @ApiProperty({ example: '1' })
+  @IsNumber()
   role: string;
 }

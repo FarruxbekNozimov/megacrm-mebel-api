@@ -5,29 +5,29 @@ export type StaffDocument = HydratedDocument<Staff>;
 
 @Schema()
 export class Staff {
-	@Prop()
-	fullname: string;
+  @Prop()
+  fullname: string;
 
-	@Prop()
-	phone_number: string;
+  @Prop()
+  phone_number: string;
 
-	@Prop()
-	card: string;
+  @Prop()
+  card: string;
 
-	@Prop()
-	login: string;
+  @Prop()
+  login: string;
 
-	@Prop()
-	password: string;
+  @Prop()
+  password: string;
 
-	@Prop()
-	is_active: boolean;
+  @Prop()
+  is_active: boolean;
 
-	@Prop()
-	role: number;
+  @Prop()
+  role: string;
 
-	@Prop()
-	hashed_token: string;
+  @Prop()
+  hashed_token: string;
 }
 
 export const StaffSchema = SchemaFactory.createForClass(Staff);

@@ -8,7 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Staff.name, schema: StaffSchema }]),
-    JwtModule
+    JwtModule, StaffModule
   ],
   controllers: [StaffController],
   providers: [StaffService],

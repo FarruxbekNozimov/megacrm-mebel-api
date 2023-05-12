@@ -4,11 +4,12 @@ import { CategoryController } from './category.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Category, CategorySchema } from './schemas/category.schema';
 import { JwtModule } from '@nestjs/jwt';
+import { StaffModule } from '../staff/staff.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Category.name, schema: CategorySchema }]),
-    JwtModule
+    JwtModule, StaffModule
   ],
   controllers: [CategoryController],
   providers: [CategoryService],

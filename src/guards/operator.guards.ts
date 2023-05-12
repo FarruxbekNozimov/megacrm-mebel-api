@@ -5,26 +5,22 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { StaffService } from '../staff/staff.service';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
-  constructor(
-    private readonly jwtService: JwtService,
-    private readonly staffService: StaffService,
-  ) { }
+  constructor(private readonly jwtService: JwtService) {}
   async canActivate(context: ExecutionContext) {
     const req = context.switchToHttp().getRequest();
     const authHeader = req.headers.authorization;
     if (!authHeader)
       throw new UnauthorizedException({
-        msg: "Foydalanuvchi avtorizatsiyadan o'tmagan !!!",
+        msg: "Foydalanuvchi ro'yxatdan o'tmagan",
       });
     const bearer = authHeader.split(' ')[0];
     const token = authHeader.split(' ')[1];
     if (bearer !== 'Bearer' || !token) {
       throw new UnauthorizedException({
-        msg: "Foydalanuvchi avtorizatsiyadan o'tmagan !!!",
+        msg: "Foydalanuvchi ro'yxatdan o'tmagan",
       });
     }
     let user: any;
@@ -34,13 +30,12 @@ export class JwtAuthGuard implements CanActivate {
       });
     } catch (error) {
       throw new UnauthorizedException({
-        msg: "Foydalanuvchi avtorizatsiyadan o'tmagan !!!",
+        msg: "Foydalanuvchi ro'yxatdan o'tmagan",
       });
     }
-    const userData = await this.staffService.findOne(user._id)
-    if (userData.is_active) {
+    if (user.role != 'OPERATOR') {
       throw new UnauthorizedException({
-        msg: "SUPER ADMIN(1) lavozimi sizga berilmagan !!!",
+        msg: 'Ruxsat etilmagan foydalanuvchi',
       });
     }
     req.user = user;

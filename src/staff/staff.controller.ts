@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { StaffService } from './staff.service';
-import { CreateStaffDto } from './dto/create-staff.dto'
-import { UpdateStaffDto } from './dto/update-staff.dto'
+import { CreateStaffDto } from './dto/create-staff.dto';
+import { UpdateStaffDto } from './dto/update-staff.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../guards/jwt-auth.guards';
 import { HttpCode } from '@nestjs/common';
@@ -18,9 +18,8 @@ import { HttpCode } from '@nestjs/common';
 @ApiTags('Staff')
 @Controller('staff')
 export class StaffController {
-  constructor(private readonly staffService: StaffService) { }
+  constructor(private readonly staffService: StaffService) {}
 
-  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Create staff' })
   @Post()
@@ -52,7 +51,6 @@ export class StaffController {
     return this.staffService.findOne(id);
   }
 
-
   @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Update staff by id' })
@@ -61,7 +59,6 @@ export class StaffController {
     return this.staffService.update(id, updateStaffDto);
   }
 
-
   @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Delete staff by id' })
@@ -69,5 +66,4 @@ export class StaffController {
   remove(@Param('id') id: string) {
     return this.staffService.remove(id);
   }
-
 }

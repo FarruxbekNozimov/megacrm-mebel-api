@@ -17,22 +17,24 @@ export class AuthService {
   constructor(
     private readonly staffService: StaffService,
     private readonly jwtService: JwtService,
-  ) { }
+  ) {}
 
   async login(loginDto: LoginDto, res: Response) {
     const { login, password } = loginDto;
     const staff = await this.staffService.findOneLogin(login);
     if (!staff) {
       throw new HttpException(
-        `Bunday staff mavjud emas`,
+        { msg: `Bunday ishchi yo'q !!!` },
         HttpStatus.BAD_REQUEST,
       );
     }
     const isMatchPass = await bcrypt.compare(password, staff.password);
     if (!isMatchPass) {
-      throw new UnauthorizedException(`User not registered`);
+      throw new UnauthorizedException({
+        msg: `Parol yoki Login xato kiritilgan !!!`,
+      });
     }
-    const tokens = await this.getToken(staff.id);
+    const tokens = await this.getToken(staff.id, staff.role);
 
     const hashed_refresh_token = await bcrypt.hash(tokens.refresh_token, 7);
     const updatedUser = await this.staffService.update(staff.id, {
@@ -45,7 +47,8 @@ export class AuthService {
     });
 
     const response = {
-      message: 'USER LOGIN',
+      status: 200,
+      msg: 'Muvaffaqiyatli kirdingiz',
       staff: updatedUser,
       tokens,
     };
@@ -57,22 +60,23 @@ export class AuthService {
       secret: process.env.REFRESH_TOKEN_KEY,
     });
     if (!userData) {
-      throw new ForbiddenException('User not found');
+      throw new ForbiddenException({ msg: "Bunday ishchi tizimda yo'q !!!" });
     }
     const updatedUser = await this.staffService.update(userData.id, {
       hashed_token: refreshToken,
     });
     res.clearCookie('token');
     const response = {
-      message: 'User logged out successfully',
+      msg: 'Muvaffaqiyatli tizimdan chiqdingiz',
       staff: updatedUser,
     };
     return response;
   }
 
-  private async getToken(id: string) {
+  private async getToken(id: string, role: string) {
     const payload = {
-      id
+      id,
+      role,
     };
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload, {
@@ -91,33 +95,33 @@ export class AuthService {
     const decodedToken = this.jwtService.decode(refreshToken);
 
     if (user_id != decodedToken['id']) {
-      throw new BadRequestException('staff not found');
+      throw new BadRequestException({ msg: 'Bunday ishchi topilmadi' });
     }
 
     const staff = await this.staffService.findOne(`${user_id}`);
     if (!staff || !staff.password) {
-      throw new BadRequestException('staff not found');
+      throw new BadRequestException({ msg: 'Bunday ishchi topilmadi' });
     }
 
     const tokenMatch = await bcrypt.compare(refreshToken, staff.password);
-    const tokens = await this.getToken(staff.id);
+    const tokens = await this.getToken(staff.id, staff.role);
 
     const refresh_token = await bcrypt.hash(tokens.refresh_token, 7);
 
     const updatedUser = await this.staffService.update(staff.id, {
       hashed_token: refresh_token,
     });
-    return updatedUser
+    return updatedUser;
   }
 
   async getUser(token: string, res: Response) {
-    const decodedToken = this.jwtService.verify(token["token"], {
+    const decodedToken = this.jwtService.verify(token['token'], {
       secret: process.env.REFRESH_TOKEN_KEY,
     });
     const staff = await this.staffService.findOne(`${decodedToken.id}`);
     if (!staff) {
-      throw new BadRequestException('staff not found');
+      throw new BadRequestException({ msg: 'Bunday ishchi topilmadi' });
     }
-    return staff
+    return staff;
   }
 }
