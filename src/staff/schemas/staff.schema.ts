@@ -20,7 +20,7 @@ export class Staff {
   @Prop()
   password: string;
 
-  @Prop()
+  @Prop({ default: true })
   is_active: boolean;
 
   @Prop()

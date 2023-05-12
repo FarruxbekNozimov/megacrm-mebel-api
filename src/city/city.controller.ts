@@ -7,10 +7,11 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { CityService } from './city.service';
-import { CreateCityDto } from './dto/create-city.dto'
-import { UpdateCityDto } from './dto/update-city.dto'
+import { CreateCityDto } from './dto/create-city.dto';
+import { UpdateCityDto } from './dto/update-city.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../guards/jwt-auth.guards';
 import { HttpCode } from '@nestjs/common';
@@ -18,7 +19,7 @@ import { HttpCode } from '@nestjs/common';
 @ApiTags('City')
 @Controller('city')
 export class CityController {
-  constructor(private readonly cityService: CityService) { }
+  constructor(private readonly cityService: CityService) {}
 
   @UseGuards(JwtAuthGuard)
   @HttpCode(200)
@@ -32,10 +33,9 @@ export class CityController {
   @HttpCode(200)
   @ApiOperation({ summary: 'Find all city' })
   @Get()
-  findAll() {
-    return this.cityService.findAll();
+  findAll(@Query() query: any) {
+    return this.cityService.findAll(query);
   }
-
 
   @UseGuards(JwtAuthGuard)
   @HttpCode(200)
@@ -45,7 +45,6 @@ export class CityController {
     return this.cityService.findOne(id);
   }
 
-
   @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Update city by id' })
@@ -53,7 +52,6 @@ export class CityController {
   update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
     return this.cityService.update(id, updateCityDto);
   }
-
 
   @UseGuards(JwtAuthGuard)
   @HttpCode(200)

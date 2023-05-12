@@ -28,7 +28,7 @@ export class StaffController {
     return this.staffService.create(createStaffDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Find all staff' })
   @Get()
@@ -52,7 +52,7 @@ export class StaffController {
     return this.staffService.findOne(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Update staff by id' })
   @Put(':id')

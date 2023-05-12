@@ -7,10 +7,11 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { CreateProductsDto } from './dto/create-products.dto'
-import { UpdateProductsDto } from './dto/update-products.dto'
+import { CreateProductsDto } from './dto/create-products.dto';
+import { UpdateProductsDto } from './dto/update-products.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../guards/jwt-auth.guards';
 import { HttpCode } from '@nestjs/common';
@@ -18,7 +19,7 @@ import { HttpCode } from '@nestjs/common';
 @ApiTags('Products')
 @Controller('products')
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) { }
+  constructor(private readonly productsService: ProductsService) {}
 
   @UseGuards(JwtAuthGuard)
   @HttpCode(200)
@@ -32,10 +33,9 @@ export class ProductsController {
   @HttpCode(200)
   @ApiOperation({ summary: 'Find all products' })
   @Get()
-  findAll() {
-    return this.productsService.findAll();
+  findAll(@Query() query: any) {
+    return this.productsService.findAll(query);
   }
-
 
   @UseGuards(JwtAuthGuard)
   @HttpCode(200)
@@ -45,15 +45,16 @@ export class ProductsController {
     return this.productsService.findOne(id);
   }
 
-
   @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Update products by id' })
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateProductsDto: UpdateProductsDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateProductsDto: UpdateProductsDto,
+  ) {
     return this.productsService.update(id, updateProductsDto);
   }
-
 
   @UseGuards(JwtAuthGuard)
   @HttpCode(200)
