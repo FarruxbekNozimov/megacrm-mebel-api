@@ -3,12 +3,10 @@ import mongoose, { HydratedDocument } from 'mongoose';
 
 export type RegionDocument = HydratedDocument<Region>;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Region {
   @Prop()
-	name:string;
-
-	
+  name: string;
 }
 
 export const RegionSchema = SchemaFactory.createForClass(Region);

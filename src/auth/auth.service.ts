@@ -34,7 +34,7 @@ export class AuthService {
         msg: `Parol yoki Login xato kiritilgan !!!`,
       });
     }
-    const tokens = await this.getToken(staff.id, staff.role);
+    const tokens = await this.getToken(staff.id, staff.role, staff.is_active);
 
     const hashed_refresh_token = await bcrypt.hash(tokens.refresh_token, 7);
     const updatedUser = await this.staffService.update(staff.id, {
@@ -73,10 +73,11 @@ export class AuthService {
     return response;
   }
 
-  private async getToken(id: string, role: string) {
+  private async getToken(id: string, role: string, is_active: boolean) {
     const payload = {
       id,
       role,
+      is_active,
     };
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload, {
@@ -104,7 +105,7 @@ export class AuthService {
     }
 
     const tokenMatch = await bcrypt.compare(refreshToken, staff.password);
-    const tokens = await this.getToken(staff.id, staff.role);
+    const tokens = await this.getToken(staff.id, staff.role, staff.is_active);
 
     const refresh_token = await bcrypt.hash(tokens.refresh_token, 7);
 

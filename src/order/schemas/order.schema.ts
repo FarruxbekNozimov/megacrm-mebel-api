@@ -3,7 +3,7 @@ import mongoose, { HydratedDocument } from 'mongoose';
 
 export type OrderDocument = HydratedDocument<Order>;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Order {
   @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Products' }])
   product_id: mongoose.Schema.Types.ObjectId;

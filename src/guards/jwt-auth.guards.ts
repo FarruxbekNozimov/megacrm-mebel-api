@@ -12,7 +12,7 @@ export class JwtAuthGuard implements CanActivate {
   constructor(
     private readonly jwtService: JwtService,
     private readonly staffService: StaffService,
-  ) { }
+  ) {}
   async canActivate(context: ExecutionContext) {
     const req = context.switchToHttp().getRequest();
     const authHeader = req.headers.authorization;
@@ -37,10 +37,10 @@ export class JwtAuthGuard implements CanActivate {
         msg: "Foydalanuvchi avtorizatsiyadan o'tmagan !!!",
       });
     }
-    const userData = await this.staffService.findOne(user._id)
+    const userData = await this.staffService.findOne(user._id);
     if (userData.is_active) {
       throw new UnauthorizedException({
-        msg: "SUPER ADMIN(1) lavozimi sizga berilmagan !!!",
+        msg: 'SUPER ADMIN(1) lavozimi sizga berilmagan !!!',
       });
     }
     req.user = user;

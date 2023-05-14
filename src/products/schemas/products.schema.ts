@@ -3,27 +3,25 @@ import mongoose, { HydratedDocument } from 'mongoose';
 
 export type ProductsDocument = HydratedDocument<Products>;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Products {
   @Prop()
-	name:string;
+  name: string;
 
-	@Prop()
-	img_link:string;
+  @Prop()
+  img: string;
 
-	@Prop()
-	price:string;
+  @Prop()
+  price: string;
 
-	@Prop([{ type: mongoose.Schema.Types.ObjectId, ref:'Category' }])
-	category_id:mongoose.Schema.Types.ObjectId;
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }])
+  category_id: mongoose.Schema.Types.ObjectId;
 
-	@Prop([{ type: mongoose.Schema.Types.ObjectId, ref:'Staff' }])
-	staff_id:mongoose.Schema.Types.ObjectId;
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Staff' }])
+  staff_id: mongoose.Schema.Types.ObjectId;
 
-	@Prop()
-	description:string;
-
-	
+  @Prop()
+  description: string;
 }
 
 export const ProductsSchema = SchemaFactory.createForClass(Products);

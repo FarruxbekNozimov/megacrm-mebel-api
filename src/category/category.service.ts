@@ -13,7 +13,7 @@ export class CategoryService {
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto) {
-    const isExist = await this.findOne(createCategoryDto.name);
+    const isExist = await this.findByName(createCategoryDto.name);
     if (isExist) {
       throw new BadRequestException({
         msg: 'Ushbu mahsulot turi avval kiritilgan !!!',
@@ -32,6 +32,10 @@ export class CategoryService {
       return allStaff;
     }
     return pagination;
+  }
+
+  async findByName(name: string) {
+    return this.orderModel.findOne({ name }).exec();
   }
 
   async findOne(id: string) {
