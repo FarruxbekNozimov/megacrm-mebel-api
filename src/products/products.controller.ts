@@ -26,6 +26,7 @@ export class ProductsController {
   @ApiOperation({ summary: 'Create products' })
   @Post()
   create(@Body() createProductsDto: CreateProductsDto) {
+    console.log(createProductsDto);
     return this.productsService.create(createProductsDto);
   }
 

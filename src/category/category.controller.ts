@@ -29,11 +29,12 @@ export class CategoryController {
     return this.categoryService.create(createCategoryDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Find all category' })
   @Get()
   findAll(@Query() query: any) {
+    console.log(query, 'query');
     return this.categoryService.findAll(query);
   }
 

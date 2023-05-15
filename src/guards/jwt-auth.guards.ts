@@ -15,7 +15,9 @@ export class JwtAuthGuard implements CanActivate {
   ) {}
   async canActivate(context: ExecutionContext) {
     const req = context.switchToHttp().getRequest();
+    console.log(req);
     const authHeader = req.headers.authorization;
+    console.log(req, authHeader);
     if (!authHeader)
       throw new UnauthorizedException({
         msg: "Foydalanuvchi avtorizatsiyadan o'tmagan !!!",
@@ -37,10 +39,10 @@ export class JwtAuthGuard implements CanActivate {
         msg: "Foydalanuvchi avtorizatsiyadan o'tmagan !!!",
       });
     }
-    const userData = await this.staffService.findOne(user._id);
-    if (userData.is_active) {
+    const userData = await this.staffService.findOne(user.id);
+    if (!userData.is_active) {
       throw new UnauthorizedException({
-        msg: 'SUPER ADMIN(1) lavozimi sizga berilmagan !!!',
+        msg: 'Siz hali aktiv emassiz !!!',
       });
     }
     req.user = user;
