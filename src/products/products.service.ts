@@ -4,6 +4,7 @@ import { UpdateProductsDto } from './dto/update-products.dto';
 import { Products, ProductsDocument } from './schemas/products.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { Category } from '../category/schemas/category.schema';
 
 @Injectable()
 export class ProductsService {
@@ -19,7 +20,9 @@ export class ProductsService {
 
   async findAll(query: string) {
     const itemsPerPage = query['limit'] || 10;
-    const allStaff = await this.orderModel.find().exec();
+    const allStaff = await this.orderModel
+      .find()
+      .populate({ path: 'category_id', select: 'name -_id' });
     const paginate = query['page'] * itemsPerPage - 1;
     const pagination = allStaff.slice(paginate, paginate + itemsPerPage);
     if (!pagination.length) {

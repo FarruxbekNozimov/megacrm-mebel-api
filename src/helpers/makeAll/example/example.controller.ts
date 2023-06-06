@@ -21,7 +21,7 @@ import { HttpCode } from '@nestjs/common';
 export class ExampleController {
   constructor(private readonly exampleService: ExampleService) {}
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Create example' })
   @Post()
@@ -29,7 +29,7 @@ export class ExampleController {
     return this.exampleService.create(createExampleDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Find all example' })
   @Get()
@@ -37,7 +37,7 @@ export class ExampleController {
     return this.exampleService.findAll(query);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Get one example' })
   @Get(':id')
@@ -45,7 +45,7 @@ export class ExampleController {
     return this.exampleService.findOne(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Update example by id' })
   @Put(':id')
@@ -53,7 +53,7 @@ export class ExampleController {
     return this.exampleService.update(id, updateExampleDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Delete example by id' })
   @Delete(':id')

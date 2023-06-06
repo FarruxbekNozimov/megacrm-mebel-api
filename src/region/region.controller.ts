@@ -21,7 +21,7 @@ import { HttpCode } from '@nestjs/common';
 export class RegionController {
   constructor(private readonly regionService: RegionService) {}
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Create region' })
   @Post()
@@ -29,7 +29,7 @@ export class RegionController {
     return this.regionService.create(createRegionDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Find all region' })
   @Get()
@@ -37,7 +37,7 @@ export class RegionController {
     return this.regionService.findAll(query);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Get one region' })
   @Get(':id')
@@ -45,7 +45,7 @@ export class RegionController {
     return this.regionService.findOne(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Update region by id' })
   @Put(':id')
@@ -53,7 +53,7 @@ export class RegionController {
     return this.regionService.update(id, updateRegionDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Delete region by id' })
   @Delete(':id')

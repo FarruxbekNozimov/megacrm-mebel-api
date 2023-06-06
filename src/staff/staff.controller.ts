@@ -36,7 +36,7 @@ export class StaffController {
     return this.staffService.findAll(query);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Get staff by login' })
   @Get()
@@ -44,7 +44,7 @@ export class StaffController {
     return this.staffService.findOneLogin(login);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Get one staff' })
   @Get(':id')
@@ -60,7 +60,7 @@ export class StaffController {
     return this.staffService.update(id, updateStaffDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Delete staff by id' })
   @Delete(':id')

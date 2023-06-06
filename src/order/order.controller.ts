@@ -21,7 +21,7 @@ import { HttpCode } from '@nestjs/common';
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Create order' })
   @Post()
@@ -29,7 +29,7 @@ export class OrderController {
     return this.orderService.create(createOrderDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Find all order' })
   @Get()
@@ -37,7 +37,7 @@ export class OrderController {
     return this.orderService.findAll(query);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Get one order' })
   @Get(':id')
@@ -45,7 +45,7 @@ export class OrderController {
     return this.orderService.findOne(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Update order by id' })
   @Put(':id')
@@ -53,7 +53,7 @@ export class OrderController {
     return this.orderService.update(id, updateOrderDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Delete order by id' })
   @Delete(':id')

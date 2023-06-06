@@ -21,7 +21,7 @@ import { HttpCode } from '@nestjs/common';
 export class OrderDeliveryController {
   constructor(private readonly orderDeliveryService: OrderDeliveryService) {}
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Create orderDelivery' })
   @Post()
@@ -29,7 +29,7 @@ export class OrderDeliveryController {
     return this.orderDeliveryService.create(createOrderDeliveryDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Find all orderDelivery' })
   @Get()
@@ -37,7 +37,7 @@ export class OrderDeliveryController {
     return this.orderDeliveryService.findAll(query);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Get one orderDelivery' })
   @Get(':id')
@@ -45,7 +45,7 @@ export class OrderDeliveryController {
     return this.orderDeliveryService.findOne(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Update orderDelivery by id' })
   @Put(':id')
@@ -56,7 +56,7 @@ export class OrderDeliveryController {
     return this.orderDeliveryService.update(id, updateOrderDeliveryDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Delete orderDelivery by id' })
   @Delete(':id')

@@ -21,7 +21,7 @@ import { HttpCode } from '@nestjs/common';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Create products' })
   @Post()
@@ -30,7 +30,7 @@ export class ProductsController {
     return this.productsService.create(createProductsDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Find all products' })
   @Get()
@@ -38,7 +38,7 @@ export class ProductsController {
     return this.productsService.findAll(query);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Get one products' })
   @Get(':id')
@@ -46,7 +46,7 @@ export class ProductsController {
     return this.productsService.findOne(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Update products by id' })
   @Put(':id')
@@ -57,7 +57,7 @@ export class ProductsController {
     return this.productsService.update(id, updateProductsDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Delete products by id' })
   @Delete(':id')

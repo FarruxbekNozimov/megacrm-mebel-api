@@ -21,7 +21,7 @@ import { HttpCode } from '@nestjs/common';
 export class CityController {
   constructor(private readonly cityService: CityService) {}
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Create city' })
   @Post()
@@ -29,7 +29,7 @@ export class CityController {
     return this.cityService.create(createCityDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Find all city' })
   @Get()
@@ -37,7 +37,7 @@ export class CityController {
     return this.cityService.findAll(query);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Get one city' })
   @Get(':id')
@@ -45,7 +45,7 @@ export class CityController {
     return this.cityService.findOne(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Update city by id' })
   @Put(':id')
@@ -53,7 +53,7 @@ export class CityController {
     return this.cityService.update(id, updateCityDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @ApiOperation({ summary: 'Delete city by id' })
   @Delete(':id')

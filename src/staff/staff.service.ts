@@ -52,7 +52,7 @@ export class StaffService {
     const itemsPerPage = query['limit'] || 10;
     const allStaff = await this.orderModel.find().exec();
     const paginate = query['page'] * itemsPerPage - 1;
-    const pagination = allStaff.slice(paginate, paginate + itemsPerPage);
+    const pagination = allStaff.slice(itemsPerPage, paginate);
     if (!pagination.length) {
       return allStaff;
     }
