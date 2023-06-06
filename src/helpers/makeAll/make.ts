@@ -223,7 +223,6 @@ makeFiles('region', 'Region', {
   name: ['string', ''],
 });
 
-
 // CITY
 makeFiles('city', 'City', {
   name: ['string', ''],
@@ -245,7 +244,6 @@ makeFiles('order-delivery', 'OrderDelivery', {
   ],
   description: ['string', ''],
 });
-
 
 // ROLES
 makeFiles('roles', 'Roles', {
